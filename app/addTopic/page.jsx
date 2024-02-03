@@ -6,12 +6,15 @@ import { useRouter } from "next/navigation";
 export default function AddTopic() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [isDisable, setIsDisable] = useState(false);
 
   const router = useRouter();
   const base_url = process.env.NEXT_PUBLIC_BASE_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsDisable("true");
+
     try {
       const res = await fetch(`${base_url}/api/topics`, {
         method: "POST",
@@ -55,6 +58,7 @@ export default function AddTopic() {
       <button
         type="submit"
         className="bg-green-600 font-bold text-white py-3 px-6 w-fit"
+        disabled={isDisable}
       >
         Add Topic
       </button>
