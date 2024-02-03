@@ -8,11 +8,12 @@ export default function AddTopic() {
   const [description, setDescription] = useState("");
 
   const router = useRouter();
+  const base_url = process.env.NEXT_PUBLIC_BASE_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("http://localhost:3000/api/topics", {
+      const res = await fetch(`${base_url}/api/topics`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

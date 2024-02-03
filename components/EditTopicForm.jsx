@@ -11,9 +11,10 @@ export default function EditTopicForm({ id, title, description }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const base_url = process.env.NEXT_PUBLIC_BASE_URL;
 
     try {
-      const res = await fetch(`http://localhost:3000/api/topics/${id}`, {
+      const res = await fetch(`${base_url}/api/topics/${id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",
