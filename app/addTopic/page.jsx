@@ -11,12 +11,6 @@ export default function AddTopic() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!title || !description) {
-      alert("Title and description are required.");
-      return;
-    }
-
     try {
       const res = await fetch("http://localhost:3000/api/topics", {
         method: "POST",
@@ -28,9 +22,10 @@ export default function AddTopic() {
 
       if (res.ok) {
         router.push("/");
-      } else {
-        throw new Error("Failed to create a topic");
+        router.refresh();
+        return;
       }
+      throw new Error("Failed to create a topic");
     } catch (error) {
       console.log(error);
     }
@@ -44,6 +39,7 @@ export default function AddTopic() {
         className="border border-slate-500 px-8 py-2"
         type="text"
         placeholder="Topic Title"
+        required
       />
 
       <input
@@ -52,6 +48,7 @@ export default function AddTopic() {
         className="border border-slate-500 px-8 py-2"
         type="text"
         placeholder="Topic Description"
+        required
       />
 
       <button
